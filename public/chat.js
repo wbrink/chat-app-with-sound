@@ -1,3 +1,5 @@
+import { doc } from "prettier";
+
 const queryStringChat = window.location.search;
 const urlParamsChat = new URLSearchParams(queryStringChat);
 const roomChat = urlParamsChat.get("room");

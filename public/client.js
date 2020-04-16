@@ -15,6 +15,10 @@ const urlParams = new URLSearchParams(queryString);
 const room = urlParams.get("room");
 const user = urlParams.get("user");
 
+// audio elements
+const localSound = document.querySelector("#localSound");
+const remoteSound = document.querySelector("#remoteSound");
+
 // variables
 var roomNumber;
 var localStream;
@@ -111,7 +115,7 @@ socket.on("ready", function() {
     rtcPeerConnection = new RTCPeerConnection(iceServers); // sets up caller RTCPeerConnection
     rtcPeerConnection.onicecandidate = onIceCandidate; // gets and sends ice candidates to the recipient
     rtcPeerConnection.ontrack = onAddStream; // This lets you connect the incoming media to an element to display it, for example.
-    //rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream);
+    rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream);
     rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream);
     rtcPeerConnection
       .createOffer()
@@ -141,7 +145,7 @@ socket.on("offer", function(event) {
     rtcPeerConnection = new RTCPeerConnection(iceServers);
     rtcPeerConnection.onicecandidate = onIceCandidate; // set up ice candidates
     rtcPeerConnection.ontrack = onAddStream; // callback to add stream of the callee. when a track is added to the connection. This lets you connect the incoming media to an element to display it, for example.
-    //rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream); // adds either video or audio track
+    rtcPeerConnection.addTrack(localStream.getTracks()[0], localStream); // adds either video or audio track
     rtcPeerConnection.addTrack(localStream.getTracks()[1], localStream); // adds eiither video or audio track
     rtcPeerConnection.setRemoteDescription(new RTCSessionDescription(event)); // sets remote description of caller
     rtcPeerConnection
