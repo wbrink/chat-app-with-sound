@@ -36,9 +36,9 @@ socketText.emit("join chat", { room: roomChat, user: userChat });
 
 // recieves from server joined chat
 socketText.on("joined chat", function(obj) {
-  if (soundOn) {
-    enterSound.play();
-  }
+  // if (soundOn) {
+  //   enterSound.play();
+  // }
 
   let div = document.createElement("div");
   div.classList.add("entered-chat");
@@ -99,9 +99,9 @@ chatTextarea.addEventListener("keyup", (e) => {
 
 // adds user's message to chat and emits to lobby
 function addMessageToChat() {
-  if (soundOn) {
-    sendSound.play();
-  }
+  // if (soundOn) {
+  //   sendSound.play();
+  // }
 
   const msg = chatTextarea.value;
   if (msg.length < 1) {
@@ -146,9 +146,9 @@ function addMessageToChat() {
 
 // message from someone else in the room
 socketText.on("chat message", function(obj) {
-  if (soundOn) {
-    recvSound.play();
-  }
+  // if (soundOn) {
+  //   recvSound.play();
+  // }
 
   let { room, user, utc, msg } = obj; // object destructuring
 
@@ -179,9 +179,9 @@ socketText.on("chat message", function(obj) {
 
 // show that the user disconnected
 socketText.on("user disconnected", function(obj) {
-  if (soundOn) {
-    exitSound.play();
-  }
+  // if (soundOn) {
+  //   exitSound.play();
+  // }
 
   let div = document.createElement("div");
   div.classList.add("entered-chat");
