@@ -73,7 +73,8 @@ socket.on("created", function(room) {
     .getUserMedia(streamConstraints)
     .then(function(stream) {
       localStream = stream;
-      localVideo.srcObject = stream;
+      // don't play back the soudn that we ouput
+      localVideo.srcObject = localStream.getVideoTracks(); 
       isCaller = true; // caller is the person who creates the room
     })
     .catch(function(err) {
