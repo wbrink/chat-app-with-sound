@@ -4,6 +4,9 @@ var app = express();
 var http = require("http").Server(app);
 var io = require("socket.io")(http);
 
+// using compression
+var compression = require("compression");
+
 var session = require("express-session");
 // Requiring passport as we've configured it
 var passport = require("./config/passport");
@@ -21,6 +24,8 @@ var SequelizeStore = require("connect-session-sequelize")(session.Store);
 var myStore = new SequelizeStore({
   db: db.sequelize,
 });
+
+app.use(compression());
 
 // We need to use sessions to keep track of our user's login status
 app.use(
